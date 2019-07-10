@@ -5,8 +5,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
+mongoose.connect(config.db, { useNewUrlParser: true });   //podłączenie bazy danych
 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 
 var indexRouter = require('./routes/index');
@@ -25,7 +29,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));    //używanie plików statycznych
 app.use(cookieSession({
   name: 'session',
   keys: config.keySession,
@@ -38,7 +42,7 @@ app.use(function (req, res, next) {
   next();
 })
 
-
+//podstrony - używanie
 app.use('/', indexRouter);
 app.use('/news', newsRouter);
 app.use('/quiz', quizRouter);
