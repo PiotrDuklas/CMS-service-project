@@ -9,10 +9,9 @@ router.get('/', (req, res) => {
     Quiz.find({}, (err, data) => {
         let sum = 0;
         data.forEach((item) => {
-
             sum += item.vote;
-        })
-        res.render('quiz', { title: 'Quiz', data, show });
+        });
+        res.render('quiz', { title: 'Quiz', data, show, sum });
     })
 });
 

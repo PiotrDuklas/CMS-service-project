@@ -17,5 +17,5 @@ block content
     p Wyniki głosowania:
     ul
       each item in data
-        li #{item.title} #{item.vote} #{item.vote/sum*'100'}%
+        li #{item.title} Liczba głosów: #{item.vote}  (#{Math.round(item.vote/sum*100)}%)
     p Oddane głosy:#{sum}
